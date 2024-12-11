@@ -4,33 +4,22 @@
 #include <numeric>
 #include <vector>
 
+#include "util.h"
+
 int main(int argc, char* argv[]) {
   std::vector<int> left, right;
   
-  if (argc < 2) {
-    std::cerr << "Usage: " << argv[0] << " <data file>" << std::endl;
-    return 1;
-  }
+  ASSERT_EQ(argc, 2) << "Usage: " << argv[0] << " <data file>";
 
   {
     std::ifstream data{argv[1]};
-    data.exceptions(std::ios::failbit);
-    try {
-      while (true) {
-        int i;
-        data >> i;
-        left.push_back(i);
-        data >> i;
-        right.push_back(i);
-      }
-    } catch (std::exception const&) {}
+    while (data) {
+      data >> left;
+      data >> right;
+    }
   }
 
-  if (left.size() != right.size()) {
-    std::cerr << "left size: " << left.size() << std::endl;
-    std::cerr << "right size: " << right.size() << std::endl;
-    return 2;
-  }
+  ASSERT_EQ(left.size(), right.size());
 
   std::sort(left.begin(), left.end());
   std::sort(right.begin(), right.end());
