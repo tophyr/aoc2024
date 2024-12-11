@@ -1,3 +1,4 @@
 .vscode/
 haskell/*.o
 haskell/*.hi
+aoc
