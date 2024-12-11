@@ -1,1 +1,3 @@
 .vscode/
+haskell/*.o
+haskell/*.hi
