@@ -12,10 +12,9 @@ fn main() {
     }
 
     let (left, right): (Vec<i32>, Vec<i32>) = BufReader::new(File::open(env::args().nth(1).unwrap()).unwrap()).lines()
-        .flat_map(|e| e.unwrap().split_whitespace().map(|s| s.to_string()).collect::<Vec<String>>().into_iter())
-        .filter(|e| !e.is_empty())
-        .map(|e| e.parse::<i32>().unwrap())
-        .collect::<Vec<i32>>().as_slice().chunks_exact(2)
+        .map(|e| e.unwrap().split_whitespace()
+            .map(|e| e.parse::<i32>().unwrap())
+            .collect::<Vec<i32>>())
         .map(|e| (e[0], e[1]))
         .unzip();
 
