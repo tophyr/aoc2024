@@ -2,3 +2,5 @@
 haskell/*.o
 haskell/*.hi
 aoc
+rust/*/target/
+rust/*/Cargo.lock

@@ -10,7 +10,7 @@ All programs expect a singular parameter denoting the data file on which to oper
 
 ## Rust
 
-**Usage:** `rustc rust/01.rs -o aoc && ./aoc 01.dat`
+**Usage:** `cargo run --manifest-path rust/01/Cargo.toml 01.dat`
 
 ## Lisp (SBCL)
 
