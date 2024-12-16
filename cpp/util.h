@@ -14,6 +14,28 @@ inline std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
   return in;
 }
 
+template <typename T>
+struct expect_t {
+  explicit expect_t(T expected)
+    : expected_{expected} {}
+
+  T const expected_;
+};
+
+template <typename T>
+std::istream& operator>>(std::istream& in, expect_t<T> expected) {
+  T t;
+  if (!(in >> t) || t != expected.expected_) {
+    in.setstate(std::ios::failbit);
+  }
+  return in;
+}
+
+template <typename T>
+inline auto expect(T expected) {
+  return expect_t{expected};
+}
+
 struct LoggingAborter {  
   template <typename X, typename Y>
   LoggingAborter(std::string_view xname, X const& xval, std::string_view yname, Y const& yval)
